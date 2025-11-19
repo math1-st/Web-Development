@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOCK</title>
+
+    <style>
+        body { margin: 0 50px; background-color: lightpink; font-family: sans-serif; }
+        header { background-color: brown; height: 50px; border-radius: 5px; color: white;
+                 display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        table { width: 100%; background: white; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
+        th, td { padding: 12px; border: 1px solid #999; text-align: center; }
+        th { background: #ffe08a; font-size: 18px; }
+        .sold { background: red; color: white; font-weight: bold; padding: 5px; border-radius: 3px;}
+        button { padding: 8px 12px; font-weight: bold; cursor: pointer; background: gold; border: none; border-radius: 5px; }
+        img { object-fit: cover; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>STOCK</h1>
+</header>
+
+<section>
+
+<table>
+    <thead>
+        <tr>
+            <th>Carro</th>
+            <th>Imagem</th>
+            <th>Preço</th>
+            <th>Unidades</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <% if (typeof carros !== 'undefined' && carros.length > 0) { %>
+        <% carros.forEach(item => { %>
+        <tr data-car="<%= item.carro %>">
+            
+            <td><%= item.carro %></td>
+
+            <td>
+                <img src="/images/<%= item.carro %>.jpg" alt="<%= item.carro %>" width="120" height="70"
+                     onerror="this.onerror=null;this.src='/images/default.jpg';">
+            </td>
+
+            <td>R$ <%= item.preco %></td>
+            
+            <td>
+                <% if (item.unidades > 0) { %>
+                    <span class="unit-count"><%= item.unidades %></span>
+                <% } else { %>
+                    <span class="sold">SOLD OUT</span>
+                <% } %>
+            </td>
+        </tr>
+        <% }) %>
+    <% } else { %>
+        <tr><td colspan="5">Nenhum carro no estoque ou erro de conexão.</td></tr>
+    <% } %>
+
+    </tbody>
+</table>
+
+</section>
+
+<script>
+function comprar_carro(botao) {
+    const row = botao.closest('tr');
+
+    fetch('/webengines', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ carro: nomeCarro , unidades: unidades})
+    })
+    .then(res => {
+        if(res.ok) return res.text(); // Espera o HTML atualizado
+        throw new Error('Erro na compra');
+    })
+    .then(() => window.location.reload()) // Recarrega a página para atualizar o estoque visualmente
+    .catch(err => console.error(err));
+}
+</script>
+
+</body>
+</html>

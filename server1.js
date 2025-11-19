@@ -11,7 +11,7 @@ app.set('view engine', 'ejs')
 app.set('views', './views');
 
 var server = http.createServer(app);
-server.listen(80);
+server.listen(3000);
 
 console.log('Servidor rodando ...'.rainbow);
 

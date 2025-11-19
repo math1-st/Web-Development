@@ -3,7 +3,7 @@
     "colors": "^1.4.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "mongodb": "^6.20.0"
+    "mongodb": "4.12"
   },
   "name": "aula9",
   "version": "1.0.0",

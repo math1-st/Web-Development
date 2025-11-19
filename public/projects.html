@@ -4,66 +4,123 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="stylesheet.css">
-        <title>Projetos</title>
+        <title>Full Stack Projects</title>
+
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     </head>
 
     <body>
-        <header>
-            <h1 id="titles">Projects</h1>
-        </header>
-        <h2 id="title">This page will take you to all lessons given in class.</h2>
 
-        <table class="text">
-            <tr>
-                <th>Lesson</th>
-                <th>Projects links</th>
-            </tr>
-            <tr>
-                <td>HTML Basics</td>
-                <td><a href="About Me/index.html">About Me</a></td>
-            </tr>
-            <tr>
-                <td>CSS Basics</td>
-                <td><a href="projects.html">Projects</a></td>
-            </tr>
-            <tr>
-                <td>Training CSS skills</td>
-                <td><a href="Copying a Model/copy.html">Copying a Model</a></td>
-            </tr>
-            <tr>
-                <td>JavaScript Basic Logic</td>
-                <td><a href="JS Basics/index.html">JS Basics</a></td>
-            </tr>
-            <tr>
-                <td>Basic JavaScript Game</td>
-                <td><a href="Guess The Number/guess.html">Guess The Number</a></td>
-            </tr>
-            <tr>
-                <td>Basic Canvas</td>
-                <td>
-                <a href="Canvas/canvas.html">Canvas</a>
-            </tr>
-            <tr>
-                <td>Basic Animation</td>
-                <td>
-                <a href="Move The Plane/Animation.html">Move The Plane</a>
-            </tr>
-            <tr>
-                <td>Basic NodeJS</td>
-                <td>
-                <a href="Setting Up a Server/home.html">Setting Up a Server</a>
-            </tr>
-            <tr>
-                <td>Sing Up/In with NodeJS</td>
-                <td>
-                <a href="Sing Up and Sign In/cadastrar.html">Sing Up and Sign In</a>
-            </tr>
-            <tr>
-                <td>Connecting a Server to MongoDB</td>
-                <td>
-                <a href="Blog/cadastrar_post.html">Blog</a>
-            </tr>
-        </table>
+        <header>
+            
+            <h1 id="titles">Full Stack Projects</h1>
+
+        </header>
+
+        <section>
+
+            <div class="left-center">
+
+                <div id="logo">
+
+                    <img src="fei.png" width="75px" height="50px">
+
+                </div>
+                
+                <table class="text">
+                    <tr>
+                        <th>Lessons</th>
+                        <th>Projects links</th>
+                    </tr>
+                    <tr>
+                        <td>HTML Basics</td>
+                        <td><a href="About Me/index.html">About Me</a></td>
+                    </tr>
+                    <tr>
+                        <td>CSS</td>
+                        <td><a href="projects.html">Projects</a></td>
+                    </tr>
+                    <tr>
+                        <td>Training CSS skills</td>
+                        <td><a href="Copying a Model/copy.html">Copying a Model</a></td>
+                    </tr>
+                    <tr>
+                        <td>JavaScript Logic</td>
+                        <td><a href="JS Basics/index.html">Poll</a></td>
+                    </tr>
+                    <tr>
+                        <td>JavaScript Game</td>
+                        <td><a href="Guess The Number/guess.html">Guess The Number</a></td>
+                    </tr>
+                    <tr>
+                        <td>Canvas</td>
+                        <td>
+                        <a href="Canvas/canvas.html">Stylizing Two Frames</a>
+                    </tr>
+                    <tr>
+                        <td>Animation</td>
+                        <td>
+                        <a href="Move The Plane/Animation.html">Move The Plane</a>
+                    </tr>
+                    <tr>
+                        <td>NodeJS</td>
+                        <td>
+                        <a href="Setting Up a Server/home.html">Setting Up a Server</a>
+                    </tr>
+                    <tr>
+                        <td>Get and Post</td>
+                        <td>
+                        <a href="Sing Up and Sign In/cadastrar.html">Sing Up and Sign In</a>
+                    </tr>
+                    <tr>
+                        <td>Connecting a Server to MongoDB</td>
+                        <td>
+                        <a href="Blog/cadastrar_post.html">Blog</a>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- <div class="right-center">
+
+                <canvas id="whoami" width="500" height="300"></canvas>
+
+            </div> -->
+
+        </section>
+
+        <script>
+
+
+
+            // CANVAS
+            // let canvas = document.getElementById("whoami");
+            // let ctx = canvas.getContext("2d");
+
+            // ctx.beginPath();
+            // ctx.lineWidth = 2;
+            // ctx.fillStyle = 'white';
+            // ctx.strokeStyle = 'white';
+            // ctx.arc(400, 125, 100, 0, 2 * Math.PI);
+            // ctx.fill();
+            // ctx.stroke();
+            // ctx.closePath();
+
+            // canvas.addEventListener("click", function(event) {
+            //     let rect = canvas.getBoundingClientRect();
+            //     let x = event.clientX - rect.left;
+            //     let y = event.clientY - rect.top;
+
+            //     let distance = Math.sqrt((x - centerX)**2 + (y - centerY)**2);
+
+            //     if (distance <= radius) {
+            //         window("You clicked the magic circle!");
+            //     }
+            // });
+
+        </script>
 
     </body>
 </html>
