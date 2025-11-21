@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Gerenciar Estoque</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #333;
+            width: 100%;
+            height: 80px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 24px; letter-spacing: 1px; }
+
+        /* Área de Busca */
+        .search-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 300px;
+            outline: none;
+        }
+
+        .btn-search {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .btn-search:hover { background-color: #0056b3; }
+
+        /* Mensagem de Erro */
+        #error-msg {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: none;
+            background-color: #ffdede;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid red;
+        }
+
+        /* Painel de Gerenciamento */
+        #manager-panel {
+            display: none; /* Invisível até encontrar carro */
+            background: white;
+            width: 400px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            border-top: 5px solid #28a745;
+        }
+
+        .car-info h2 { margin-top: 0; color: #333; text-transform: uppercase;}
+        
+        .car-img-preview {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #eee;
+        }
+
+        /* Controles */
+        .stock-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .btn-control {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-minus { background-color: #dc3545; color: white; }
+        .btn-plus { background-color: #28a745; color: white; }
+        
+        .stock-display {
+            font-size: 32px;
+            font-weight: bold;
+            width: 80px;
+            text-align: center;
+            border: none;
+            background: transparent;
+        }
+
+        .btn-save {
+            width: 100%;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        .btn-save:hover { background-color: black; }
+
+        .status-msg {
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ADMIN - ESTOQUE</h1>
+    </header>
+
+    <section class="search-section">
+        <input type="text" id="searchInput" placeholder="Nome do carro (ex: twingo)">
+        <button class="btn-search" onclick="procurarCarro()">BUSCAR</button>
+    </section>
+
+    <!-- Área de Erro -->
+    <div id="error-msg">Carro não encontrado no catálogo!</div>
+
+    <!-- Painel Principal -->
+    <section id="manager-panel">
+        
+        <div class="car-info">
+            <h2 id="displayNome">---</h2>
+            <img id="displayImg" src="" class="car-img-preview" 
+                 onerror="this.src='/images/default.jpg'">
+        </div>
+
+        <div style="color: gray; margin-bottom: 10px;">Quantidade Atual:</div>
+
+        <div class="stock-controls">
+            <button class="btn-control btn-minus" onclick="alterarEstoque(-1)">-</button>
+            <input type="number" id="displayQtd" class="stock-display" value="0" readonly>
+            <button class="btn-control btn-plus" onclick="alterarEstoque(1)">+</button>
+        </div>
+
+        <button class="btn-save" onclick="salvarAlteracoes()">ATUALIZAR BANCO DE DADOS</button>
+
+        <div id="statusMsg" class="status-msg"></div>
+
+    </section>
+
+    <script>
+        // Variável global para segurar o nome do carro atual
+        let carroAtualNome = "";
+        let estoqueAtual = 0;
+
+        // Função para buscar carro no Servidor
+        function procurarCarro() {
+            const input = document.getElementById('searchInput');
+            const nomeBusca = input.value.toLowerCase().trim();
+            
+            const painel = document.getElementById('manager-panel');
+            const errorMsg = document.getElementById('error-msg');
+            const status = document.getElementById('statusMsg');
+
+            // Limpa mensagens anteriores
+            errorMsg.style.display = "none";
+            status.innerText = "";
+            status.style.color = "black";
+
+            if (!nomeBusca) {
+                alert("Digite um nome!");
+                return;
+            }
+
+            console.log("Buscando no servidor por:", nomeBusca);
+
+            // FAZ A BUSCA REAL NA API
+            fetch(`/api/carro/${nomeBusca}`)
+                .then(response => {
+                    if (!response.ok) {
+                        // Se deu erro (404), lança exceção para cair no catch
+                        throw new Error("Não encontrado");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // SUCESSO: Carro encontrado
+                    console.log("Carro encontrado:", data);
+
+                    carroAtualNome = data.carro;
+                    estoqueAtual = data.unidades;
+
+                    // Atualiza a tela
+                    document.getElementById('displayNome').innerText = data.carro.toUpperCase();
+                    document.getElementById('displayQtd').value = estoqueAtual;
+                    document.getElementById('displayImg').src = `/images/${data.carro}.jpg`;
+
+                    // Mostra o painel
+                    painel.style.display = "block";
+                })
+                .catch(err => {
+                    // ERRO: Carro não existe
+                    console.warn(err);
+                    painel.style.display = "none"; // Esconde o painel para evitar edição
+                    errorMsg.style.display = "block"; // Mostra erro vermelho
+                    errorMsg.innerText = `O carro "${nomeBusca}" não existe no banco de dados.`;
+                });
+        }
+
+        // Função visual para mudar número (+/-)
+        function alterarEstoque(valor) {
+            estoqueAtual = Number(estoqueAtual) + valor;
+            if (estoqueAtual < 0) estoqueAtual = 0;
+            document.getElementById('displayQtd').value = estoqueAtual;
+        }
+
+        // Função para SALVAR no Banco
+        function salvarAlteracoes() {
+            const status = document.getElementById('statusMsg');
+            status.innerText = "Salvando...";
+            status.style.color = "blue";
+
+            console.log(`Enviando atualização: ${carroAtualNome} -> ${estoqueAtual}`);
+
+            // ENVIA O POST REAL PARA O SERVIDOR
+            fetch('/api/atualizar-estoque', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    carro: carroAtualNome,
+                    unidades: estoqueAtual
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.sucesso) {
+                    status.innerText = "SUCESSO! Estoque atualizado.";
+                    status.style.color = "green";
+                } else {
+                    status.innerText = "Erro ao salvar.";
+                    status.style.color = "red";
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                status.innerText = "Erro de conexão com o servidor.";
+                status.style.color = "red";
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOCK</title>
+
+    <style>
+        body { 
+            margin: 0 50px; /* Margem ajustada */
+            background-color: lightpink; 
+            font-family: sans-serif;
+        }
+        header { 
+            background-color: brown; 
+            height: 50px; 
+            border-radius: 5px; 
+            color: white;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 20px;
+        }
+        section { 
+            margin-top: 20px; 
+            /* Mudei height fixa para min-height para não cortar carros se tiver muitos */
+            min-height: 600px; 
+            height: auto;
+            border: 5px solid red; 
+            border-radius: 10px; 
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .row { 
+            display: flex; 
+            justify-content: center; /* Centraliza os carros */
+            gap: 50px; /* Espaço entre carros */
+            width: 100%;
+            margin-bottom: 50px; 
+            flex-wrap: wrap;
+        }
+        .box { 
+            width: 300px; 
+            /* Altura automática para caber o botão se precisar */
+            height: auto; 
+            padding-bottom: 10px;
+            background-color: white; /* Fundo branco para destacar */
+        }
+        .box img { 
+            display: block; 
+            width: 100%;
+            height: 160px;
+            object-fit: cover; /* Garante que a imagem não estique */
+        }
+        button { 
+            width: 100%; 
+            height: 40px; 
+            background-color: gold; /* Cor diferente para destacar */
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        button:hover {
+            background-color: orange;
+        }
+        .subtitle, .units, .sold-out { 
+            height: 40px; 
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+        }
+        .subtitle { background-color: lightyellow; }
+        .units { background-color: azure; }
+        .sold-out { background-color: red; color: white; }
+        
+        h2 { margin: 0; font-size: 18px; }
+    </style>
+</head>
+<body>
+    
+<header>
+    <h1>STOCK</h1>
+</header>
+
+<section>
+
+    <% if (carros && carros.length > 0) { %>
+
+        <% 
+        // Loop para criar linhas a cada 3 carros
+        for (let i = 0; i < carros.length; i += 3) { 
+        %>
+
+        <div class="row">
+            <% carros.slice(i, i+3).forEach(carro => { %>
+
+                <div class="box"
+                    data-car="<%= carro.db_carro %>">
+
+                    <img src="/images/<%= carro.db_carro %>.jpg" 
+                         alt="<%= carro.db_carro %>"
+                         onerror="this.onerror=null;this.src='/images/default.jpg';"> 
+
+                    <% if (carro.db_unidades > 0) { %>
+                        
+                        <div class="subtitle">
+                            <h2>R$<%= carro.db_preco %></h2>
+                        </div>
+
+                        <div class="units">
+                            <h2>UNITS: <span class="unit-count"><%= carro.db_unidades %></span></h2>
+                        </div>
+                        
+                        <button onclick="comprar_carro(this)">COMPRAR</button>
+
+                    <% } else { %>
+
+                        <div class="subtitle" style="visibility: hidden;"><h2>-</h2></div> <div class="units" style="visibility: hidden;"><h2>-</h2></div>
+                        
+                        <div class="sold-out">
+                            <h2>SOLD OUT</h2>
+                        </div>
+
+                    <% } %>
+
+                </div>
+
+            <% }) %>
+        </div>
+
+        <% } %>
+
+    <% } else { %>
+        <h2>Nenhum carro encontrado no estoque.</h2>
+    <% } %>
+
+</section>
+
+<script>
+    function comprar_carro(botao) {
+        const box = botao.closest('.box');
+        const nomeCarro = box.getAttribute('data-car');
+        
+        // Pergunta se o usuário tem certeza
+        if(!confirm(`Deseja comprar o ${nomeCarro}?`)) return;
+
+        fetch('/comprar_carro', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ carro: nomeCarro })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.sucesso) {
+                alert(data.mensagem);
+                window.location.reload(); // Recarrega a página para atualizar o número
+            } else {
+                alert("Erro: " + data.mensagem);
+            }
+        })
+        .catch(err => console.error(err));
+    }
+</script>
+
+</body>
+</html>

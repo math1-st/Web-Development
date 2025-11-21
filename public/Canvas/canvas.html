@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=300, initial-scale=1.0">
+    <title>Figuras</title>
+    <style>
+        body {
+            background-color: burlywood;
+        }
+
+        #canvas {
+            background-color: white;
+        }
+
+        #canvas2 {
+            background-color: #9cfcd4;
+        }
+
+        .center {
+            width: 400px;
+            margin: auto auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center">
+    <h1>Canvas</h1>
+    <h2><a href="../projects.html">Voltar para Portfólio - Projetos</a></h2>
+    <br>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <canvas id="canvas2" width="300" height="300"></canvas>
+    </div>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        const texto = "Canvas";
+        ctx.font = "18.75px Arial"; // 50 * 0.375
+        ctx.fillText(texto, 112.5, 37.5); // 300,100
+
+        // Círculo verde superior central direito
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'green';
+        ctx.arc(159.375, 131.25, 75, 1.757 * Math.PI, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // Círculo verde superior central esquerdo
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'green';
+        ctx.arc(140.625, 131.25, 75, 1 * Math.PI, 1.248 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // Círculo verde superior central
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'green';
+        ctx.arc(150, 131.25, 67.5, 1 * Math.PI, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // Azul superior esquerdo
+        ctx.beginPath();
+        ctx.fillStyle = 'blue';
+        ctx.strokeStyle = 'blue';
+        ctx.fillRect(0, 0, 37.5, 37.5);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Vermelho superior direito
+        ctx.beginPath();
+        ctx.fillStyle = 'red';
+        ctx.strokeStyle = 'red';
+        ctx.fillRect(262.5, 0, 37.5, 37.5);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Amarelo inferior esquerdo
+        ctx.beginPath();
+        ctx.fillStyle = 'yellow';
+        ctx.strokeStyle = 'yellow';
+        ctx.fillRect(0, 225, 37.5, 75);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Amarelo lateral inferior esquerdo
+        ctx.beginPath();
+        ctx.fillStyle = 'yellow';
+        ctx.strokeStyle = 'yellow';
+        ctx.fillRect(0, 262.5, 75, 37.5);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Preto inferior direito
+        ctx.beginPath();
+        ctx.fillStyle = 'black';
+        ctx.strokeStyle = 'black';
+        ctx.fillRect(262.5, 225, 37.5, 75);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Preto inferior lateral direito
+        ctx.beginPath();
+        ctx.fillStyle = 'black';
+        ctx.strokeStyle = 'black';
+        ctx.fillRect(225, 262.5, 75, 37.5);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Ciano esquerdo
+        ctx.beginPath();
+        ctx.fillStyle = '#00ffff';
+        ctx.strokeStyle = '#00ffff';
+        ctx.fillRect(0, 93.75, 37.5, 75);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Ciano direito
+        ctx.beginPath();
+        ctx.fillStyle = '#00ffff';
+        ctx.strokeStyle = '#00ffff';
+        ctx.fillRect(262.5, 112.5, 37.5, 37.5);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Linha verde horizontal
+        ctx.beginPath();
+        ctx.fillStyle = 'green';
+        ctx.strokeStyle = 'green';
+        ctx.fillRect(0, 131.25, 300, 1.875);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Círculo amarelo esquerdo
+        ctx.beginPath();
+        ctx.fillStyle = 'yellow';
+        ctx.strokeStyle = 'green';
+        ctx.arc(75, 206.25, 18.75, 2 * Math.PI, 4 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // Círculo amarelo direito
+        ctx.beginPath();
+        ctx.fillStyle = 'yellow';
+        ctx.strokeStyle = 'green';
+        ctx.arc(225, 206.25, 18.75, 2 * Math.PI, 4 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // Círculo ciano central
+        ctx.beginPath();
+        ctx.fillStyle = '#00ffff';
+        ctx.strokeStyle = 'blue';
+        ctx.arc(150, 93.75, 18.75, 2 * Math.PI, 4 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // Círculo verde inferior esquerdo
+        ctx.beginPath();
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'green';
+        ctx.arc(150, 300, 67.5, Math.PI, 1.5 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // Círculo verde inferior direito
+        ctx.beginPath();
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'green';
+        ctx.arc(150, 300, 56.25, 1.5 * Math.PI, 3 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // Círculo ciano inferior central
+        ctx.beginPath();
+        ctx.fillStyle = '#00ffff';
+        ctx.strokeStyle = 'green';
+        ctx.arc(150, 300, 37.5, 2 * Math.PI, 4 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // Quadrado vermelho central
+        ctx.beginPath();
+        ctx.fillStyle = 'red';
+        ctx.strokeStyle = 'red';
+        ctx.fillRect(112.5, 133.125, 37.5, 37.5);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Linha cinza vertical
+        ctx.beginPath();
+        ctx.fillStyle = 'gray';
+        ctx.strokeStyle = 'gray';
+        ctx.fillRect(148.875, 131.25, 1.875, 131.25);
+        ctx.strokeRect(0, 0, 0, 0);
+        ctx.closePath();
+
+        // Linha azul (diagonal esquerda)
+        ctx.beginPath();
+        ctx.strokeStyle = 'blue';
+        ctx.moveTo(150, 131.25);
+        ctx.lineTo(37.5, 37.5);
+        ctx.stroke();
+        ctx.closePath();
+
+        // Linha vermelha (diagonal direita)
+        ctx.beginPath();
+        ctx.strokeStyle = 'red';
+        ctx.moveTo(150, 131.25);
+        ctx.lineTo(262.5, 37.5);
+        ctx.stroke();
+        ctx.closePath();
+
+        // CASA
+
+        let canvas2 = document.getElementById('canvas2');
+        let ctx2 = canvas2.getContext('2d');
+
+        // chão
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = 'gray';
+        ctx2.strokeStyle = 'gray';
+        ctx2.fillRect(0, 225, 300, 75);
+        ctx2.strokeRect(0,0,0,0);
+        ctx2.closePath();
+
+        // tronco 1
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = '#81491f';
+        ctx2.strokeStyle = '#81491f';
+        ctx2.fillRect(37.5, 187.5, 18.75, 37.5);
+        ctx2.strokeRect(0,0,0,0);
+        ctx2.closePath();
+
+        // folha 1
+        ctx2.beginPath();
+        ctx2.lineWidth = 1;
+        ctx2.fillStyle = 'green';
+        ctx2.strokeStyle = 'green';
+        ctx2.arc(46.875, 178.125, 18.75, 2 * Math.PI, 4 * Math.PI);
+        ctx2.fill();
+        ctx2.stroke();
+        ctx2.closePath();
+
+        // tronco 2
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = '#81491f';
+        ctx2.strokeStyle = '#81491f';
+        ctx2.fillRect(262.5, 225, 18.75, 37.5);
+        ctx2.strokeRect(0,0,0,0);
+        ctx2.closePath();
+
+        // folha 2
+        ctx2.beginPath();
+        ctx2.lineWidth = 1;
+        ctx2.fillStyle = 'green';
+        ctx2.strokeStyle = 'green';
+        ctx2.arc(271.875, 215.625, 18.75, 2 * Math.PI, 4 * Math.PI);
+        ctx2.fill();
+        ctx2.stroke();
+        ctx2.closePath();
+
+        // sol
+        ctx2.beginPath();
+        ctx2.lineWidth = 1;
+        ctx2.fillStyle = 'yellow';
+        ctx2.strokeStyle = 'yellow';
+        ctx2.arc(225, 75, 28.125, 2 * Math.PI, 4 * Math.PI);
+        ctx2.fill();
+        ctx2.stroke();
+        ctx2.closePath();
+
+        // casa
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = '#81491f';
+        ctx2.strokeStyle = '#81491f';
+        ctx2.fillRect(112.5, 150, 75, 75);
+        ctx2.strokeRect(0,0,0,0);
+        ctx2.closePath();
+
+        // porta
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = '#5f4525';
+        ctx2.strokeStyle = '#5f4525';
+        ctx2.fillRect(142.5, 187.5, 15, 37.5);
+        ctx2.strokeRect(0,0,0,0);
+        ctx2.closePath();
+
+        // janela esquerda
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = '#61bbfb';
+        ctx2.strokeStyle = '#61bbfb';
+        ctx2.fillRect(118.125, 163.125, 24.375, 24.375);
+        ctx2.strokeRect(0,0,0,0);
+        ctx2.closePath();
+
+        // janela direita
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = '#61bbfb';
+        ctx2.strokeStyle = '#61bbfb';
+        ctx2.fillRect(157.5, 163.125, 24.375, 24.375);
+        ctx2.strokeRect(0,0,0,0);
+        ctx2.closePath();
+
+        // telhado
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = '#ec6e52';
+        ctx2.strokeStyle = '#ec6e52';
+        ctx2.moveTo(112.5, 150);
+        ctx2.lineTo(150, 112.5);
+        ctx2.lineTo(187.5, 150);
+        ctx2.fill();
+        ctx2.stroke();
+        ctx2.closePath();
+
+        // rio 1
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = '#598cfa';
+        ctx2.strokeStyle = '#598cfa';
+        ctx2.fillRect(0, 225, 37.5, 75);
+        ctx2.strokeRect(0,0,0,0);
+        ctx2.closePath();
+
+        // rio 2
+        ctx2.beginPath();
+        ctx2.lineWidth = 1;
+        ctx2.fillStyle = '#598cfa';
+        ctx2.strokeStyle = '#598cfa';
+        ctx2.arc(0, 225, 37.5, 1.5 * Math.PI, 2.5 * Math.PI);
+        ctx2.fill();
+        ctx2.stroke();
+        ctx2.closePath();
+
+        // rio 3
+        ctx2.beginPath();
+        ctx2.lineWidth = 2;
+        ctx2.fillStyle = '#598cfa';
+        ctx2.strokeStyle = '#598cfa';
+        ctx2.fillRect(0, 262.5, 112.5, 37.5);
+        ctx2.strokeRect(0,0,0,0);
+        ctx2.closePath();
+
+        // rio 4
+        ctx2.beginPath();
+        ctx2.lineWidth = 1;
+        ctx2.fillStyle = '#598cfa';
+        ctx2.strokeStyle = '#598cfa';
+        ctx2.arc(112.5, 300, 37.5, 1.5 * Math.PI, 2.5 * Math.PI);
+        ctx2.fill();
+        ctx2.stroke();
+        ctx2.closePath();
+
+
+    </script>
+</body>
+</html>
