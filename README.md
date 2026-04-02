@@ -5,3 +5,5 @@ The Full Stack discipline was introduced during my first semester of the Compute
 Here you'll find lessons covering key topics like HTML, CSS, JavaScript, and Node.js.
 
 This repository's content ranges from Basic HTML concepts to building dynamic websites connected to MongoDB.
+
+Search for public directory if you just want to see the static web pages.
