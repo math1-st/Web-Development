@@ -1,0 +1,88 @@
+body {
+    background-color: lightblue;
+    margin-left: 100px;
+    margin-right: 100px;
+
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+header {
+    background-color: #006eab;
+    border-radius: 5px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+#titles {
+    color: white;
+    text-align: center;
+}
+
+#logo {
+    width: 595px;
+    height: 50px;
+    background-color: white;
+    border: 4px solid #006eab;
+    border-radius: 5px;
+
+
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+section {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.right-center {
+    width: 100%;
+    border: 4px solid #006eab;
+    border-radius: 5px;
+}
+
+/* #whoami {
+    display: flex;
+    border: 2px solid red;
+} */
+
+.links {
+    font-weight: bold;
+}
+
+.text {
+    color: #006eab;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.text a{
+    text-decoration: none;
+    color: rgb(36, 36, 149);
+}
+
+.text a:hover {
+    color: red;
+}
+
+table {
+
+    width: 600px;
+
+    background-color: white;
+    border: 3px solid #006eab;
+    border-spacing: 0;
+    border-radius: 5px;
+    
+}
+
+th, td {
+    border: 2px solid #006eab;
+    padding: 10px;
+}

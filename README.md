@@ -6,4 +6,3 @@ Here you'll find lessons covering key topics like HTML, CSS, JavaScript, and Nod
 
 This repository's content ranges from Basic HTML concepts to building dynamic websites connected to MongoDB.
 
-Search for public directory if you just want to see the static web pages.
